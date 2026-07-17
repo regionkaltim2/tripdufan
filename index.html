@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <!-- Mencegah zoom tidak sengaja dan menyesuaikan layar penuh -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Sistem Monitoring 5R+S</title> 
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%; /* KUNCI 1: Gunakan 100%, bukan 100vh */
+      overflow: hidden; /* Mencegah scroll ganda di halaman utama */
+      background-color: #0d1117; 
+      /* Untuk HP yang mendukung dinamic viewport height */
+      height: 100dvh; 
+    }
+    
+    iframe {
+      border: none;
+      position: absolute; /* KUNCI 2: Gunakan position absolute */
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Tambahkan atribut scrolling dan sandbox jika diperlukan ke depannya -->
+  <iframe src="" allowfullscreen></iframe>
+
+</body>
+</html>https://script.google.com/macros/s/AKfycbyzlKH6USq8n7JtUNdqFDcsk5dby0RDJCMpnsf5Fgd8TVxdFbLqDD0VuyqZ0BCsYdiJ/exec
