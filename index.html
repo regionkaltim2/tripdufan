@@ -2,37 +2,74 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <!-- Mencegah zoom tidak sengaja dan menyesuaikan layar penuh -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>Sistem Monitoring 5R+S</title> 
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="no-referrer">
+  <meta name="robots" content="noindex, nofollow">
+  <title>APLIKASI SAFETY AND 5R| Secure Portal</title>
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      height: 100%; /* KUNCI 1: Gunakan 100%, bukan 100vh */
-      overflow: hidden; /* Mencegah scroll ganda di halaman utama */
-      background-color: #0d1117; 
-      /* Untuk HP yang mendukung dinamic viewport height */
-      height: 100dvh; 
+    body, html { 
+      margin: 0; padding: 0; width: 100%; height: 100%; 
+      overflow: hidden; background-color: #020617; 
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    iframe { border: none; width: 100%; height: 100%; display: block; }
+    
+    #loader {
+      position: fixed; inset: 0; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      background: #020617; color: #22d3ee; z-index: 10;
     }
     
-    iframe {
-      border: none;
-      position: absolute; /* KUNCI 2: Gunakan position absolute */
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      display: block;
+    .spinner {
+      width: 40px; height: 40px; border: 3px solid rgba(34, 211, 238, 0.1);
+      border-top: 3px solid #22d3ee; border-radius: 50%;
+      animation: spin 1s linear infinite; margin-bottom: 15px;
+    }
+    
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    
+    .loading-text {
+      font-size: 10px; font-weight: 800; letter-spacing: 0.3em;
+      text-transform: uppercase; opacity: 0.8;
     }
   </style>
 </head>
 <body>
 
-  <!-- Tambahkan atribut scrolling dan sandbox jika diperlukan ke depannya -->
-  <iframe src="https://script.google.com/macros/s/AKfycbyzlKH6USq8n7JtUNdqFDcsk5dby0RDJCMpnsf5Fgd8TVxdFbLqDD0VuyqZ0BCsYdiJ/exec" allowfullscreen></iframe>
+  <div id="loader">
+    <div class="spinner"></div>
+    <div class="loading-text">Menghubungkan ke Server Aman...</div>
+  </div>
+  
+  <iframe id="secureFrame" src="about:blank" allow="geolocation; microphone; camera"></iframe>
 
+  <script>
+    (function() {
+      /**
+       * MENGAMANKAN URL:
+       * Link Apps Script Anda disandikan dalam Base64.
+       * Ini mencegah bot sederhana membaca link asli Anda dari source code GitHub.
+       */
+      // PERBAIKAN: Baris di bawah ini sudah diperbaiki sintaksnya
+      const secret = "aHR0cHM6Ly9zY3JpcHQuZ29vZ2xlLmNvbS9tYWNyb3Mvcy9BS2Z5Y2J5emxLSDZVU3E4bjdKdFVOZHFGRGNzazVkYnkwUkRKQ01wbnNmNUZnZDhUVnhkRmJMcUREMFZ1eXFaMEJDc1lkaUovZXhlYw==";
+      
+      const frame = document.getElementById('secureFrame');
+      const loader = document.getElementById('loader');
+      
+      try {
+        const targetUrl = atob(secret);
+        frame.src = targetUrl;
+        
+        // Sembunyikan loader saat frame selesai dimuat
+        frame.onload = function() {
+          loader.style.transition = 'opacity 0.5s ease';
+          loader.style.opacity = '0';
+          setTimeout(() => { loader.style.display = 'none'; }, 500);
+        };
+      } catch (e) {
+        document.querySelector('.loading-text').innerText = "Koneksi Gagal. Silakan Refresh.";
+      }
+    })();
+  </script>
 </body>
 </html>
